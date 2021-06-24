@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smart_SurveyForm::smart_survey" title="SM Survey Form" module="Smart_SurveyForm" sortOrder="51" resource="Smart_SurveyForm::smart_survey"/>
+        <add id="Smart_SurveyForm::form" title="Survey Forms" module="Smart_SurveyForm" sortOrder="10" action="smart_survey/form" resource="Smart_SurveyForm::form" parent="Smart_SurveyForm::smart_survey"/>
+        <add id="Smart_SurveyForm::answer" title="Answers" module="Smart_SurveyForm" sortOrder="30" action="smart_survey/answer" resource="Smart_SurveyForm::answer" parent="Smart_SurveyForm::smart_survey"/>
+    </menu>
+</config>

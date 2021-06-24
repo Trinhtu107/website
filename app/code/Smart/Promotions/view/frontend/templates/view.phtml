@@ -1,0 +1,33 @@
+<?php
+/** @var \Smart\Promotions\Block\View $block */
+
+$promotion = $block->getPromoCollection();
+?>
+<style>
+    .back{
+        display: none;
+    }
+</style>
+<?php if ($promotion && count($promotion) > 0): ?>
+    <?php foreach ($promotion as $item) :?>
+    <main>
+        <div class="container">
+            <div class="back">
+                <a href="<?= $block->getUrl('sm_promo')?>">back</a>
+            </div>
+            <section class="page-banner">
+                <img src="<?= $block->getImageUrl($item->getImageDetail())?>" alt="" />
+            </section>
+            <section class="promotion-page">
+                <h1 class="home-title text-center promotion-title"><?= $item->getTitle() ?></h1>
+                <time class="d-block text-center pro-time">
+                    Từ ngày <?= $block->formatDatePromotion($item->getStartDate()) ?> đến ngày <?= $block->formatDatePromotion($item->getEndDate()) ?>
+                </time>
+                <div class="content">
+                    <?= $block->getContentWYSIWYG($item->getContent() ?? '')?>
+                </div>
+            </section>
+        </div>
+    </main>
+    <?php endforeach;?>
+<?php endif;?>

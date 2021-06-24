@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Cowell\ExtensionAttributes\Api\Data\CustomDataInterface" type="Cowell\ExtensionAttributes\Model\Product\CustomData" />
+
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="processExampleSimpleExtensionAttributes" type="Cowell\ExtensionAttributes\Plugin\ProcessExampleAttributes" />
+    </type>
+    <type name="Magento\Catalog\Api\Data\ProductInterface">
+        <plugin name="getExtensionAttributesAfter" type="Cowell\ExtensionAttributes\Plugin\getExtensionAttributesAfter" />
+    </type>
+
+    <type name="Magento\CatalogImportExport\Model\Import\Product\Validator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="product_group_id" xsi:type="object">Cowell\ExtensionAttributes\Model\Import\Product\Validator\ProductGroupValidate</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

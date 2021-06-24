@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Cowell Commerce.
+ *
+ * @category   Cowell
+ * @package    Cowell_ProductExtensionAttributeImport
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2020-2021 Cowell Commerce.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Cowell_ProductExtensionAttributeImport" >
+        <sequence>
+            <module name="Magento_Catalog"/>
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,35 @@
+
+<?php
+//@codingStandardsIgnoreFile
+
+/** @var \Smart\SurveyForm\Block\ListForm\SurveyForm $block */
+?>
+<?php $allnews = $block->getCountCollection(); ?>
+<?php if ($allnews && count($allnews) > 0): ?>
+<section class="survey-page">
+    <div class="survey-list">
+        <div class="row">
+            <?php foreach ($allnews as $news): ?>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                    <a class="survey-item" href="<?= $block->getUrl('surveyform/index/view') . '?id=' . $news->getId() ?>">
+                        <div class="img"><img src="<?= $block->getImageUrl($news->getThumbnailImage())?>" alt=""></div>
+                        <div class="caption">
+                            <div class="name"><?= $news->getTitle()?></div>
+                            <time>Đăng ngày <?= $block->fomatCreatedDate($news->getCreatedAt()) ?></time>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+</section>
+<?php else : ?>
+    <div class="rsgitech-no-records">
+        <?= __('Survey Form not available') ?>
+    </div>
+<?php endif;?>
+<?php if ($block->getPagerHtml()): ?>
+    <div class="toolbar bottom"><?= $block->getPagerHtml(); ?></div>
+<?php endif ?>
+
+
