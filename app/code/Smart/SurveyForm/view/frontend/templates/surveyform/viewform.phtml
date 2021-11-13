@@ -1,0 +1,85 @@
+
+<?php
+//@codingStandardsIgnoreFile
+
+/** @var \Smart\SurveyForm\Block\ListForm\View $block */
+?>
+
+<?php if (count($block->getCollection()) <= 0) :?>
+    <div class="rsgitech-no-records">
+        <?= __('Survey Form not available') ?>
+    </div>
+<?php else:?>
+<main>
+    <div class="container">
+        <section class="survey-page">
+            <h1 class="home-title text-center survey-title"><?= $block->getTitle()?></h1>
+            <div class="survey-des text-center"><?= $block->getDescription()?></div>
+
+            <form id="survey-form" data-mage-init='{"validation":{}}' enctype="multipart/form-data" action="<?= $block->getUrlPost() ?>" method="post">
+                <input type="hidden" name="form_id" value="<?= $block->getFormId()?>">
+                <div class="survey-form">
+                    <?php
+                    $stt = 1;
+                    foreach ($block->getCollection() as $item) : ?>
+                        <?php if ($item->getData('active') == 1) :?>
+                            <?php if ($item->getData('type_id') == 1) :?>
+                                <div class="form-group">
+                                    <label class="w-100"><?= $stt . '. ' . $item->getData('question')?></label>
+                                    <input id="text_<?= $item->getData('id')?>" data-validate="{required:true}" type="text" name="answer_text_<?= $item->getData('id')?>" >
+                                </div>
+
+                            <?php endif;?>
+                            <?php if ($item->getData('type_id') == 2) :?>
+                                <div class="form-group">
+                                    <label class="w-100"><?= $stt . '. ' . $item->getData('question')?></label>
+                                    <ul>
+                                        <?php $arr = $block->getAnswer($item->getData('answer'));
+                                            for ($i = 0; $i < count($arr); $i++) :?>
+                                                <li class="radio">
+                                                    <input id="rd.<?= $item->getData('id') . "." . $i?>"
+                                                           type="radio"
+                                                           name="answer_select_<?= $item->getData('id')?>"
+                                                           value="<?= $arr[$i]?>"
+                                                           data-validate="{required:true, 'validate-one-required-by-name':true}"
+                                                           <?= $i == 0 ? "checked" : ''?>
+                                                    >
+                                                    <label for="rd.<?= $item->getData('id') . "." . $i?>"><?= $arr[$i]?></label>
+                                                </li>
+                                        <?php endfor;?>
+                                    </ul>
+                                </div>
+                            <?php endif;?>
+                            <?php if ($item->getData('type_id') == 3) :?>
+                                <div class="form-group smart_type_multiselect" >
+                                    <label class="w-100"><?= $stt . '. ' . $item->getData('question')?></label>
+                                    <ul>
+                                        <?php $arr = $block->getAnswer($item->getData('answer'));
+                                        for ($i = 0; $i < count($arr); $i++) :?>
+                                            <li class="checkbox">
+                                                <input id="cb.<?= $item->getData('id') . "." . $i?>"
+                                                       type="checkbox"
+                                                       name="answer_multi_<?= $item->getData('id')?>[]"
+                                                       value="<?= $arr[$i]?>"
+                                                       data-validate="{'validate-one-checkbox-required-by-name': 'answer_multi_'}"
+                                                >
+                                                <label for="cb.<?= $item->getData('id') . "." . $i?>"><?= $arr[$i]?></label>
+                                            </li>
+                                        <?php endfor;?>
+                                    </ul>
+                                </div>
+                            <?php endif;?>
+                        <?php endif?>
+                    <?php
+                        $stt++;
+                    endforeach;?>
+                    <div class="btn-wrap text-center">
+                        <input type="submit" value="xác nhận">
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+<?php endif;?>
+
