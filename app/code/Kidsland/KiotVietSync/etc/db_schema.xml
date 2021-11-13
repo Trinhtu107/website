@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="kiot_viet_sync_log" resource="default" engine="innodb" comment="kiot viet sync log">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column xsi:type="int" name="product_id" unsigned="true" comment="Product ID"/>
+        <column xsi:type="int" name="source_id" unsigned="true" comment="kiotviet product id"/>
+        <column xsi:type="datetime" name="date_time" on_update="false" nullable="true" comment="Date"/>
+        <column xsi:type="int" name="status" unsigned="true" comment="0: fails, 1: true -> trạng thái đồng bồ bằng tay và tự động"/>
+        <column xsi:type="text" name="sync_data" comment="Response Api"/>
+        <column xsi:type="text" name="old_data" comment=""/>
+    </table>
+</schema>
